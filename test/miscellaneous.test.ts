@@ -1,11 +1,18 @@
-import { ChainId, Token, TokenAmount, Pair, InsufficientInputAmountError } from '../src'
+import { ChainId, Token, TokenAmount, Pair, InsufficientInputAmountError, JSBI } from '../src'
 import { sortedInsert } from '../src/utils'
 
 describe('miscellaneous', () => {
   it('getLiquidityMinted:0', async () => {
     const tokenA = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000001', 18)
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
-    const pair = new Pair(new TokenAmount(tokenA, '0'), new TokenAmount(tokenB, '0'))
+    const pair = new Pair(
+      '0x0000000000000000000000000000000000000003',
+      new TokenAmount(tokenA, '0'),
+      new TokenAmount(tokenB, '0'),
+      new TokenAmount(tokenA, '0'),
+      new TokenAmount(tokenB, '0'),
+      JSBI.BigInt(0)
+    )
 
     expect(() => {
       pair.getLiquidityMinted(
@@ -35,7 +42,14 @@ describe('miscellaneous', () => {
   it('getLiquidityMinted:!0', async () => {
     const tokenA = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000001', 18)
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
-    const pair = new Pair(new TokenAmount(tokenA, '10000'), new TokenAmount(tokenB, '10000'))
+    const pair = new Pair(
+      '0x0000000000000000000000000000000000000003',
+      new TokenAmount(tokenA, '10000'),
+      new TokenAmount(tokenB, '10000'),
+      new TokenAmount(tokenA, '10000'),
+      new TokenAmount(tokenB, '10000'),
+      JSBI.BigInt(0)
+    )
 
     expect(
       pair
@@ -51,7 +65,14 @@ describe('miscellaneous', () => {
   it('getLiquidityValue:!feeOn', async () => {
     const tokenA = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000001', 18)
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
-    const pair = new Pair(new TokenAmount(tokenA, '1000'), new TokenAmount(tokenB, '1000'))
+    const pair = new Pair(
+      '0x0000000000000000000000000000000000000003',
+      new TokenAmount(tokenA, '1000'),
+      new TokenAmount(tokenB, '1000'),
+      new TokenAmount(tokenA, '1000'),
+      new TokenAmount(tokenB, '1000'),
+      JSBI.BigInt(0)
+    )
 
     {
       const liquidityValue = pair.getLiquidityValue(
@@ -92,7 +113,14 @@ describe('miscellaneous', () => {
   it('getLiquidityValue:feeOn', async () => {
     const tokenA = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000001', 18)
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
-    const pair = new Pair(new TokenAmount(tokenA, '1000'), new TokenAmount(tokenB, '1000'))
+    const pair = new Pair(
+      '0x0000000000000000000000000000000000000003',
+      new TokenAmount(tokenA, '1000'),
+      new TokenAmount(tokenB, '1000'),
+      new TokenAmount(tokenA, '1000'),
+      new TokenAmount(tokenB, '1000'),
+      JSBI.BigInt(0)
+    )
 
     const liquidityValue = pair.getLiquidityValue(
       tokenA,

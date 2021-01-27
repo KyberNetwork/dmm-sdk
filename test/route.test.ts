@@ -1,12 +1,35 @@
-import { Token, WETH, ChainId, Pair, TokenAmount, Route, ETHER } from '../src'
+import { Token, WETH, ChainId, Pair, TokenAmount, Route, ETHER, JSBI } from '../src'
 
 describe('Route', () => {
+  const pairAddress = '0x0000000000000000000000000000000000000003'
   const token0 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000001', 18, 't0')
   const token1 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000002', 18, 't1')
   const weth = WETH[ChainId.MAINNET]
-  const pair_0_1 = new Pair(new TokenAmount(token0, '100'), new TokenAmount(token1, '200'))
-  const pair_0_weth = new Pair(new TokenAmount(token0, '100'), new TokenAmount(weth, '100'))
-  const pair_1_weth = new Pair(new TokenAmount(token1, '175'), new TokenAmount(weth, '100'))
+  const fee = JSBI.BigInt(3e15)
+  const pair_0_1 = new Pair(
+    pairAddress,
+    new TokenAmount(token0, '100'),
+    new TokenAmount(token1, '200'),
+    new TokenAmount(token0, '100'),
+    new TokenAmount(token1, '200'),
+    fee
+  )
+  const pair_0_weth = new Pair(
+    pairAddress,
+    new TokenAmount(token0, '100'),
+    new TokenAmount(weth, '100'),
+    new TokenAmount(token0, '100'),
+    new TokenAmount(weth, '100'),
+    fee
+  )
+  const pair_1_weth = new Pair(
+    pairAddress,
+    new TokenAmount(token1, '175'),
+    new TokenAmount(weth, '100'),
+    new TokenAmount(token1, '175'),
+    new TokenAmount(weth, '100'),
+    fee
+  )
 
   it('constructs a path from the tokens', () => {
     const route = new Route([pair_0_1], token0)

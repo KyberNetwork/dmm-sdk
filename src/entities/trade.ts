@@ -153,7 +153,9 @@ export class Trade {
 
   public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType) {
     const amounts: TokenAmount[] = new Array(route.path.length)
-    const nextPairs: Pair[] = new Array(route.pairs.length)
+    const nextInputReserves: TokenAmount[] = new Array(route.pairs.length)
+    const nextOutputReserves: TokenAmount[] = new Array(route.pairs.length)
+
     if (tradeType === TradeType.EXACT_INPUT) {
       invariant(currencyEquals(amount.currency, route.input), 'INPUT')
       amounts[0] = wrappedAmount(amount, route.chainId)
@@ -161,7 +163,8 @@ export class Trade {
         const pair = route.pairs[i]
         const [outputAmount, nextPair] = pair.getOutputAmount(amounts[i])
         amounts[i + 1] = outputAmount
-        nextPairs[i] = nextPair
+        nextInputReserves[i] = nextPair[0]
+        nextOutputReserves[i] = nextPair[1]
       }
     } else {
       invariant(currencyEquals(amount.currency, route.output), 'OUTPUT')
@@ -170,7 +173,8 @@ export class Trade {
         const pair = route.pairs[i - 1]
         const [inputAmount, nextPair] = pair.getInputAmount(amounts[i])
         amounts[i - 1] = inputAmount
-        nextPairs[i - 1] = nextPair
+        nextInputReserves[i - 1] = nextPair[0]
+        nextOutputReserves[i - 1] = nextPair[1]
       }
     }
 
@@ -194,7 +198,7 @@ export class Trade {
       this.inputAmount.raw,
       this.outputAmount.raw
     )
-    this.nextMidPrice = Price.fromRoute(new Route(nextPairs, route.input))
+    this.nextMidPrice = Price.fromReserves(nextInputReserves, nextOutputReserves)
     this.priceImpact = computePriceImpact(route.midPrice, this.inputAmount, this.outputAmount)
   }
 
