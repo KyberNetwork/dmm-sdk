@@ -8,7 +8,7 @@ import ERC20 from './abis/ERC20.json'
 import XYZSwapFactory from './abis/XYZSwapFactory.json'
 import XYZSwapPair from './abis/XYZSwapPair.json'
 
-import { ChainId, FACTORY_ADDRESS } from './constants'
+import { ChainId } from './constants'
 import { parseBigintIsh } from './utils'
 import { Token } from './entities/token'
 
@@ -69,9 +69,10 @@ export abstract class Fetcher {
   public static async fetchPairData(
     tokenA: Token,
     tokenB: Token,
+    factoryAddress: string,
     provider = getDefaultProvider(getNetwork(tokenA.chainId))
   ): Promise<Pair[]> {
-    const addresses = await Fetcher.fetchPairAddresses(tokenA, tokenB, provider)
+    const addresses = await Fetcher.fetchPairAddresses(tokenA, tokenB, factoryAddress, provider)
     return Promise.all(
       addresses.map(async address => {
         const [reserve0, reserve1, vReserve0, vReserve1, feeInPrecision] = await new Contract(
@@ -103,13 +104,14 @@ export abstract class Fetcher {
   public static async fetchPairAddresses(
     tokenA: Token,
     tokenB: Token,
+    factoryAddress: string,
     provider = getDefaultProvider(getNetwork(tokenA.chainId))
   ): Promise<string[]> {
     invariant(tokenA.chainId === tokenB.chainId, 'CHAIN_ID')
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
     const chainId = tokenA.chainId
     if (typeof PAIR_ADDRESS_CACHE?.[chainId]?.[tokens[1].address]?.[tokenB.address] == 'undefined') {
-      const factory = await new Contract(FACTORY_ADDRESS, XYZSwapFactory.abi, provider)
+      const factory = await new Contract(factoryAddress, XYZSwapFactory.abi, provider)
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
         [chainId]: {
