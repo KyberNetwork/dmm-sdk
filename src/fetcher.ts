@@ -118,7 +118,7 @@ export abstract class Fetcher {
           ...PAIR_ADDRESS_CACHE?.[chainId],
           [tokens[0].address]: {
             ...PAIR_ADDRESS_CACHE?.[chainId]?.[tokens[0].address],
-            [tokens[1].address]: await factory.getPairs(tokens[0].address, tokens[1].address)
+            [tokens[1].address]: await factory.getPools(tokens[0].address, tokens[1].address)
           }
         }
       }

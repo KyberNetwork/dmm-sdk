@@ -341,7 +341,7 @@ export class Trade {
           currencyOut,
           {
             maxNumResults,
-            maxHops: maxHops - 1
+            maxHops: maxHops - 1,
           },
           [...currentPairs, bestPool],
           originalAmountIn,
@@ -459,7 +459,7 @@ export class Trade {
           bestAmountIn,
           {
             maxNumResults,
-            maxHops: maxHops - 1
+            maxHops: maxHops - 1,
           },
           [bestPool, ...currentPairs],
           originalAmountOut,

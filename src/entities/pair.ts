@@ -10,7 +10,7 @@ export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
   private readonly virtualTokenAmounts: [TokenAmount, TokenAmount]
-  private readonly fee: JSBI
+  public readonly fee: JSBI
   public readonly address: string
 
   public constructor(
