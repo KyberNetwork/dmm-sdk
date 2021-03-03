@@ -29,7 +29,7 @@ export class Pair {
       ? [virtualTokenAmountA, virtualTokenAmountB]
       : [virtualTokenAmountB, virtualTokenAmountA]
 
-    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, address, 18, 'XYZ-LP', 'XYZSwap LP')
+    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, address, 18, 'DMM-LP', 'DMM LP')
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
     this.virtualTokenAmounts = virtualTokenAmounts as [TokenAmount, TokenAmount]
     this.fee = fee
