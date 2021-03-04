@@ -12,6 +12,7 @@ export class Pair {
   private readonly virtualTokenAmounts: [TokenAmount, TokenAmount]
   public readonly fee: JSBI
   public readonly address: string
+  public readonly amp: JSBI
 
   public constructor(
     address: string,
@@ -19,7 +20,8 @@ export class Pair {
     tokenAmountB: TokenAmount,
     virtualTokenAmountA: TokenAmount,
     virtualTokenAmountB: TokenAmount,
-    fee: JSBI
+    fee: JSBI,
+    amp: JSBI
   ) {
     this.address = address
     const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
@@ -33,6 +35,7 @@ export class Pair {
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
     this.virtualTokenAmounts = virtualTokenAmounts as [TokenAmount, TokenAmount]
     this.fee = fee
+    this.amp = amp
   }
 
   /**
