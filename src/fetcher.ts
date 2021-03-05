@@ -11,6 +11,7 @@ import XYZSwapPair from './abis/XYZSwapPair.json'
 import { ChainId } from './constants'
 import { parseBigintIsh } from './utils'
 import { Token } from './entities/token'
+import { JSBI } from '.'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.MAINNET]: {
