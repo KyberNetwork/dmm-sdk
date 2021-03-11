@@ -69,6 +69,13 @@ export class Pair {
     return token.equals(this.token0) ? this.token0Price : this.token1Price
   }
 
+  public priceOfReal(token: Token): Price {
+    invariant(this.involvesToken(token), 'TOKEN')
+    return token.equals(this.token0)
+      ? new Price(this.token0, this.token1, this.tokenAmounts[0].raw, this.tokenAmounts[1].raw)
+      : new Price(this.token1, this.token0, this.tokenAmounts[1].raw, this.tokenAmounts[0].raw)
+  }
+
   /**
    * Returns the chain ID of the tokens in the pair.
    */
