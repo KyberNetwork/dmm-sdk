@@ -15,8 +15,8 @@ import { JSBI } from '.'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.MAINNET]: {
-    '0xE0B7927c4aF23765Cb51314A0E0521A9645F0E2A': 9, // DGD
-  },
+    '0xE0B7927c4aF23765Cb51314A0E0521A9645F0E2A': 9 // DGD
+  }
 }
 
 let PAIR_ADDRESS_CACHE: { [chainId: number]: { [token0Address: string]: { [token1Address: string]: string[] } } } = {}
@@ -53,8 +53,8 @@ export abstract class Fetcher {
               ...TOKEN_DECIMALS_CACHE,
               [chainId]: {
                 ...TOKEN_DECIMALS_CACHE?.[chainId],
-                [address]: decimals,
-              },
+                [address]: decimals
+              }
             }
             return decimals
           })
@@ -75,7 +75,7 @@ export abstract class Fetcher {
   ): Promise<Pair[]> {
     const addresses = await Fetcher.fetchPairAddresses(tokenA, tokenB, factoryAddress, provider)
     return Promise.all(
-      addresses.map(async (address) => {
+      addresses.map(async address => {
         const [reserve0, reserve1, vReserve0, vReserve1, feeInPrecision] = await new Contract(
           address,
           XYZSwapPair.abi,
@@ -121,9 +121,9 @@ export abstract class Fetcher {
           ...PAIR_ADDRESS_CACHE?.[chainId],
           [tokens[0].address]: {
             ...PAIR_ADDRESS_CACHE?.[chainId]?.[tokens[0].address],
-            [tokens[1].address]: await factory.getPools(tokens[0].address, tokens[1].address),
-          },
-        },
+            [tokens[1].address]: await factory.getPools(tokens[0].address, tokens[1].address)
+          }
+        }
       }
     }
     return PAIR_ADDRESS_CACHE[chainId][tokens[0].address][tokens[1].address]
