@@ -6,13 +6,15 @@ describe('Route', () => {
   const token1 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000002', 18, 't1')
   const weth = WETH[ChainId.MAINNET]
   const fee = JSBI.BigInt(3e15)
+  const ampBps = JSBI.BigInt(10000)
   const pair_0_1 = new Pair(
     pairAddress,
     new TokenAmount(token0, '100'),
     new TokenAmount(token1, '200'),
     new TokenAmount(token0, '100'),
     new TokenAmount(token1, '200'),
-    fee
+    fee,
+    ampBps
   )
   const pair_0_weth = new Pair(
     pairAddress,
@@ -20,7 +22,8 @@ describe('Route', () => {
     new TokenAmount(weth, '100'),
     new TokenAmount(token0, '100'),
     new TokenAmount(weth, '100'),
-    fee
+    fee,
+    ampBps
   )
   const pair_1_weth = new Pair(
     pairAddress,
@@ -28,7 +31,8 @@ describe('Route', () => {
     new TokenAmount(weth, '100'),
     new TokenAmount(token1, '175'),
     new TokenAmount(weth, '100'),
-    fee
+    fee,
+    ampBps
   )
 
   it('constructs a path from the tokens', () => {

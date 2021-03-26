@@ -19,6 +19,7 @@ describe('Trade', () => {
   const token2 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000003', 18, 't2')
   const token3 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000004', 18, 't3')
   const fee = JSBI.BigInt(3e15)
+  const ampBps = JSBI.BigInt(10000)
 
   const pair_0_1 = new Pair(
     '0x0000000000000000000000000000000000000005',
@@ -26,7 +27,8 @@ describe('Trade', () => {
     new TokenAmount(token1, JSBI.BigInt(1000e18)),
     new TokenAmount(token0, JSBI.BigInt(1000e18)),
     new TokenAmount(token1, JSBI.BigInt(1000e18)),
-    fee
+    fee,
+    ampBps
   )
   const pair_0_2 = new Pair(
     '0x0000000000000000000000000000000000000006',
@@ -34,7 +36,8 @@ describe('Trade', () => {
     new TokenAmount(token2, JSBI.BigInt(1100e18)),
     new TokenAmount(token0, JSBI.BigInt(1000e18)),
     new TokenAmount(token2, JSBI.BigInt(1100e18)),
-    fee
+    fee,
+    ampBps
   )
   const pair_0_3 = new Pair(
     '0x0000000000000000000000000000000000000007',
@@ -42,7 +45,8 @@ describe('Trade', () => {
     new TokenAmount(token3, JSBI.BigInt(900e18)),
     new TokenAmount(token0, JSBI.BigInt(1000e18)),
     new TokenAmount(token3, JSBI.BigInt(900e18)),
-    fee
+    fee,
+    ampBps
   )
   const pair_1_2 = new Pair(
     '0x0000000000000000000000000000000000000008',
@@ -50,7 +54,8 @@ describe('Trade', () => {
     new TokenAmount(token2, JSBI.BigInt(1000e18)),
     new TokenAmount(token1, JSBI.BigInt(1200e18)),
     new TokenAmount(token2, JSBI.BigInt(1000e18)),
-    fee
+    fee,
+    ampBps
   )
   const pair_1_3 = new Pair(
     '0x0000000000000000000000000000000000000009',
@@ -58,7 +63,8 @@ describe('Trade', () => {
     new TokenAmount(token3, JSBI.BigInt(1300e18)),
     new TokenAmount(token1, JSBI.BigInt(1200e18)),
     new TokenAmount(token3, JSBI.BigInt(1300e18)),
-    fee
+    fee,
+    ampBps
   )
 
   const pair_weth_0 = new Pair(
@@ -67,7 +73,8 @@ describe('Trade', () => {
     new TokenAmount(token0, JSBI.BigInt(1000e18)),
     new TokenAmount(WETH[ChainId.MAINNET], JSBI.BigInt(1000e18)),
     new TokenAmount(token0, JSBI.BigInt(1000e18)),
-    fee
+    fee,
+    ampBps
   )
 
   const empty_pair_0_1 = new Pair(
@@ -76,7 +83,8 @@ describe('Trade', () => {
     new TokenAmount(token1, JSBI.BigInt(0)),
     new TokenAmount(token0, JSBI.BigInt(0)),
     new TokenAmount(token1, JSBI.BigInt(0)),
-    fee
+    fee,
+    ampBps
   )
 
   it('can be constructed with ETHER as input', () => {

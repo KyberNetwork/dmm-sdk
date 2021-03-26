@@ -19,6 +19,7 @@ const DECIMAL_PERMUTATIONS: [number, number, number][] = [
   [18, 18, 18]
 ]
 const TEST_FEE = JSBI.BigInt(3e15) // 0.3%
+const ampBps = JSBI.BigInt(10000)
 
 function decimalize(amount: number, decimals: number): bigint {
   return BigInt(amount) * BigInt(10) ** BigInt(decimals)
@@ -46,7 +47,8 @@ describe('entities', () => {
             new TokenAmount(tokens[1], decimalize(1, tokens[1].decimals)),
             new TokenAmount(tokens[0], decimalize(1, tokens[0].decimals)),
             new TokenAmount(tokens[1], decimalize(1, tokens[1].decimals)),
-            TEST_FEE
+            TEST_FEE,
+            ampBps
           ),
           new Pair(
             PAIR_ADDRESSES[1],
@@ -54,7 +56,8 @@ describe('entities', () => {
             new TokenAmount(tokens[2], decimalize(1, tokens[2].decimals)),
             new TokenAmount(tokens[1], decimalize(1, tokens[1].decimals)),
             new TokenAmount(tokens[2], decimalize(1, tokens[2].decimals)),
-            TEST_FEE
+            TEST_FEE,
+            ampBps
           ),
           new Pair(
             PAIR_ADDRESSES[2],
@@ -62,7 +65,8 @@ describe('entities', () => {
             new TokenAmount(WETH, decimalize(1234, WETH.decimals)),
             new TokenAmount(tokens[2], decimalize(1, tokens[2].decimals)),
             new TokenAmount(WETH, decimalize(1234, WETH.decimals)),
-            TEST_FEE
+            TEST_FEE,
+            ampBps
           )
         ]
       })
@@ -126,7 +130,8 @@ describe('entities', () => {
                 new TokenAmount(WETH, decimalize(10, WETH.decimals)),
                 new TokenAmount(tokens[1], decimalize(5, tokens[1].decimals)),
                 new TokenAmount(WETH, decimalize(10, WETH.decimals)),
-                TEST_FEE
+                TEST_FEE,
+                ampBps
               )
             ],
             tokens[1]
@@ -188,7 +193,8 @@ describe('entities', () => {
                     decimalize(10, WETH.decimals) +
                       (tokens[1].decimals === 9 ? BigInt('30090280812437312') : BigInt('30090270812437322'))
                   ),
-                  TEST_FEE
+                  TEST_FEE,
+                  ampBps
                 )
               ],
               tokens[1]

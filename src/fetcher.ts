@@ -5,12 +5,13 @@ import { TokenAmount } from './entities/fractions/tokenAmount'
 import { Pair } from './entities/pair'
 import invariant from 'tiny-invariant'
 import ERC20 from './abis/ERC20.json'
-import XYZSwapFactory from './abis/XYZSwapFactory.json'
-import XYZSwapPair from './abis/XYZSwapPair.json'
+import DMMFactory from './abis/DMMFactory.json'
+import DMMPool from './abis/DMMPool.json'
 
 import { ChainId } from './constants'
 import { parseBigintIsh } from './utils'
 import { Token } from './entities/token'
+import { JSBI } from '.'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.MAINNET]: {
@@ -64,6 +65,7 @@ export abstract class Fetcher {
    * Fetches information about pairs and constructs pairs array from the given two tokens.
    * @param tokenA first token
    * @param tokenB second token
+   * @param factoryAddress address of dmmFactory
    * @param provider the provider to use to fetch the data
    */
   public static async fetchPairData(
@@ -75,11 +77,9 @@ export abstract class Fetcher {
     const addresses = await Fetcher.fetchPairAddresses(tokenA, tokenB, factoryAddress, provider)
     return Promise.all(
       addresses.map(async address => {
-        const [reserve0, reserve1, vReserve0, vReserve1, feeInPrecision] = await new Contract(
-          address,
-          XYZSwapPair.abi,
-          provider
-        ).getTradeInfo()
+        let poolContract = new Contract(address, DMMPool.abi, provider)
+        const [reserve0, reserve1, vReserve0, vReserve1, feeInPrecision] = await poolContract.getTradeInfo()
+        const ampBps = await poolContract.ampBps()
         const balances = tokenA.sortsBefore(tokenB)
           ? [reserve0, reserve1, vReserve0, vReserve1]
           : [reserve1, reserve0, vReserve1, vReserve0]
@@ -89,7 +89,8 @@ export abstract class Fetcher {
           new TokenAmount(tokenB, balances[1]),
           new TokenAmount(tokenA, balances[2]),
           new TokenAmount(tokenB, balances[3]),
-          parseBigintIsh(feeInPrecision)
+          parseBigintIsh(feeInPrecision),
+          JSBI.BigInt(ampBps)
         )
       })
     )
@@ -111,14 +112,14 @@ export abstract class Fetcher {
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
     const chainId = tokenA.chainId
     if (typeof PAIR_ADDRESS_CACHE?.[chainId]?.[tokens[1].address]?.[tokenB.address] == 'undefined') {
-      const factory = await new Contract(factoryAddress, XYZSwapFactory.abi, provider)
+      const factory = await new Contract(factoryAddress, DMMFactory.abi, provider)
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
         [chainId]: {
           ...PAIR_ADDRESS_CACHE?.[chainId],
           [tokens[0].address]: {
             ...PAIR_ADDRESS_CACHE?.[chainId]?.[tokens[0].address],
-            [tokens[1].address]: await factory.getPairs(tokens[0].address, tokens[1].address)
+            [tokens[1].address]: await factory.getPools(tokens[0].address, tokens[1].address)
           }
         }
       }

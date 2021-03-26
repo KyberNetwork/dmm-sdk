@@ -12,6 +12,7 @@ function checkDeadline(deadline: string[] | string): void {
 describe('Router', () => {
   const token0 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000001', 18, 't0')
   const token1 = new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000002', 18, 't1')
+  const ampBps = JSBI.BigInt(10000)
 
   const pair_0_1 = new Pair(
     '0x0000000000000000000000000000000000000005',
@@ -19,7 +20,8 @@ describe('Router', () => {
     new TokenAmount(token1, JSBI.BigInt(1000)),
     new TokenAmount(token0, JSBI.BigInt(1000)),
     new TokenAmount(token1, JSBI.BigInt(1000)),
-    JSBI.BigInt(3e15)
+    JSBI.BigInt(3e15),
+    ampBps
   )
 
   const pair_weth_0 = new Pair(
@@ -28,7 +30,8 @@ describe('Router', () => {
     new TokenAmount(token0, '1000'),
     new TokenAmount(WETH[ChainId.MAINNET], '1000'),
     new TokenAmount(token0, '1000'),
-    JSBI.BigInt(3e15)
+    JSBI.BigInt(3e15),
+    ampBps
   )
 
   describe('#swapCallParameters', () => {

@@ -10,8 +10,9 @@ export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
   private readonly virtualTokenAmounts: [TokenAmount, TokenAmount]
-  private readonly fee: JSBI
+  public readonly fee: JSBI
   public readonly address: string
+  public readonly amp: JSBI
 
   public constructor(
     address: string,
@@ -19,7 +20,8 @@ export class Pair {
     tokenAmountB: TokenAmount,
     virtualTokenAmountA: TokenAmount,
     virtualTokenAmountB: TokenAmount,
-    fee: JSBI
+    fee: JSBI,
+    amp: JSBI
   ) {
     this.address = address
     const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
@@ -29,10 +31,11 @@ export class Pair {
       ? [virtualTokenAmountA, virtualTokenAmountB]
       : [virtualTokenAmountB, virtualTokenAmountA]
 
-    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, address, 18, 'XYZ-LP', 'XYZSwap LP')
+    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, address, 18, 'DMM-LP', 'DMM LP')
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
     this.virtualTokenAmounts = virtualTokenAmounts as [TokenAmount, TokenAmount]
     this.fee = fee
+    this.amp = amp
   }
 
   /**
@@ -64,6 +67,13 @@ export class Pair {
   public priceOf(token: Token): Price {
     invariant(this.involvesToken(token), 'TOKEN')
     return token.equals(this.token0) ? this.token0Price : this.token1Price
+  }
+
+  public priceOfReal(token: Token): Price {
+    invariant(this.involvesToken(token), 'TOKEN')
+    return token.equals(this.token0)
+      ? new Price(this.token0, this.token1, this.tokenAmounts[0].raw, this.tokenAmounts[1].raw)
+      : new Price(this.token1, this.token0, this.tokenAmounts[1].raw, this.tokenAmounts[0].raw)
   }
 
   /**

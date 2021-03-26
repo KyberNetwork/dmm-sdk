@@ -1,6 +1,8 @@
 import { ChainId, Token, TokenAmount, Pair, InsufficientInputAmountError, JSBI } from '../src'
 import { sortedInsert } from '../src/utils'
 
+const ampBps = JSBI.BigInt(10000)
+
 describe('miscellaneous', () => {
   it('getLiquidityMinted:0', async () => {
     const tokenA = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000001', 18)
@@ -11,7 +13,8 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenB, '0'),
       new TokenAmount(tokenA, '0'),
       new TokenAmount(tokenB, '0'),
-      JSBI.BigInt(0)
+      JSBI.BigInt(0),
+      ampBps
     )
 
     expect(() => {
@@ -48,7 +51,8 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenB, '10000'),
       new TokenAmount(tokenA, '10000'),
       new TokenAmount(tokenB, '10000'),
-      JSBI.BigInt(0)
+      JSBI.BigInt(0),
+      ampBps
     )
 
     expect(
@@ -71,7 +75,8 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenB, '1000'),
       new TokenAmount(tokenA, '1000'),
       new TokenAmount(tokenB, '1000'),
-      JSBI.BigInt(0)
+      JSBI.BigInt(0),
+      ampBps
     )
 
     {
@@ -119,7 +124,8 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenB, '1000'),
       new TokenAmount(tokenA, '1000'),
       new TokenAmount(tokenB, '1000'),
-      JSBI.BigInt(0)
+      JSBI.BigInt(0),
+      ampBps
     )
 
     const liquidityValue = pair.getLiquidityValue(

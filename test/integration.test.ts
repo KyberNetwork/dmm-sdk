@@ -1,8 +1,8 @@
 import { deployContract, MockProvider } from 'ethereum-waffle'
 import { BigNumber } from 'ethers'
 
-import XYZSwapFactory from '../src/abis/XYZSwapFactory.json'
-import XYZSwapRouter02 from './artifacts/XYZSwapRouter02.json'
+import DMMFactory from '../src/abis/DMMFactory.json'
+import DMMRouter02 from './artifacts/DMMRouter02.json'
 import ERC20 from './artifacts/TestToken.json'
 import WETH from './artifacts/WETH9.json'
 import { Fetcher } from '../src'
@@ -12,9 +12,9 @@ describe('integration', () => {
     const provider = new MockProvider()
 
     const [wallet] = provider.getWallets()
-    let factory = await deployContract(wallet, XYZSwapFactory, [wallet.address])
+    let factory = await deployContract(wallet, DMMFactory, [wallet.address])
     let weth = await deployContract(wallet, WETH, [])
-    let router = await deployContract(wallet, XYZSwapRouter02, [factory.address, weth.address])
+    let router = await deployContract(wallet, DMMRouter02, [factory.address, weth.address])
 
     const tokens = []
     for (let i = 0; i < 3; i++) {
