@@ -11,6 +11,8 @@ describe('Pair', () => {
 
   const FEE = JSBI.BigInt(0)
 
+  const ampBps = JSBI.BigInt(0)
+
   describe('constructor', () => {
     it('cannot be used for tokens on different chains', () => {
       expect(
@@ -21,7 +23,8 @@ describe('Pair', () => {
             new TokenAmount(WETH[ChainId.RINKEBY], '100'),
             V_USDC_AMOUNT,
             new TokenAmount(WETH[ChainId.RINKEBY], '100'),
-            FEE
+            FEE,
+            ampBps
           )
       ).toThrow('CHAIN_IDS')
     })
@@ -29,61 +32,69 @@ describe('Pair', () => {
 
   describe('#token0', () => {
     it('always is the token that sorts before', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).token0).toEqual(DAI)
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).token0).toEqual(DAI)
+      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token0).toEqual(
+        DAI
+      )
+      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token0).toEqual(
+        DAI
+      )
     })
   })
   describe('#token1', () => {
     it('always is the token that sorts after', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).token1).toEqual(USDC)
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).token1).toEqual(USDC)
+      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token1).toEqual(
+        USDC
+      )
+      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token1).toEqual(
+        USDC
+      )
     })
   })
   describe('#reserve0', () => {
     it('always comes from the token that sorts before', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).reserve0).toEqual(
-        DAI_AMOUNT
-      )
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).reserve0).toEqual(
-        DAI_AMOUNT
-      )
+      expect(
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserve0
+      ).toEqual(DAI_AMOUNT)
+      expect(
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserve0
+      ).toEqual(DAI_AMOUNT)
     })
   })
   describe('#reserve1', () => {
     it('always comes from the token that sorts after', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).reserve1).toEqual(
-        USDC_AMOUNT
-      )
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).reserve1).toEqual(
-        USDC_AMOUNT
-      )
+      expect(
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserve1
+      ).toEqual(USDC_AMOUNT)
+      expect(
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserve1
+      ).toEqual(USDC_AMOUNT)
     })
   })
 
   describe('#token0Price', () => {
     it('returns price of token0 in terms of token1', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).token0Price).toEqual(
-        new Price(DAI, USDC, '200', '202')
-      )
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).token0Price).toEqual(
-        new Price(DAI, USDC, '200', '202')
-      )
+      expect(
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token0Price
+      ).toEqual(new Price(DAI, USDC, '200', '202'))
+      expect(
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token0Price
+      ).toEqual(new Price(DAI, USDC, '200', '202'))
     })
   })
 
   describe('#token1Price', () => {
     it('returns price of token1 in terms of token0', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).token1Price).toEqual(
-        new Price(USDC, DAI, '202', '200')
-      )
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).token1Price).toEqual(
-        new Price(USDC, DAI, '202', '200')
-      )
+      expect(
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token1Price
+      ).toEqual(new Price(USDC, DAI, '202', '200'))
+      expect(
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token1Price
+      ).toEqual(new Price(USDC, DAI, '202', '200'))
     })
   })
 
   describe('#priceOf', () => {
-    const pair = new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE)
+    const pair = new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps)
     it('returns price of token in terms of other token', () => {
       expect(pair.priceOf(DAI)).toEqual(pair.token0Price)
       expect(pair.priceOf(USDC)).toEqual(pair.token1Price)
@@ -96,17 +107,17 @@ describe('Pair', () => {
 
   describe('#reserveOf', () => {
     it('returns reserves of the given token', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).reserveOf(USDC)).toEqual(
-        USDC_AMOUNT
-      )
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).reserveOf(USDC)).toEqual(
-        USDC_AMOUNT
-      )
+      expect(
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserveOf(USDC)
+      ).toEqual(USDC_AMOUNT)
+      expect(
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserveOf(USDC)
+      ).toEqual(USDC_AMOUNT)
     })
 
     it('throws if not in the pair', () => {
       expect(() =>
-        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).reserveOf(
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserveOf(
           WETH[ChainId.MAINNET]
         )
       ).toThrow('TOKEN')
@@ -115,23 +126,23 @@ describe('Pair', () => {
 
   describe('#chainId', () => {
     it('returns the token0 chainId', () => {
-      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).chainId).toEqual(
+      expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).chainId).toEqual(
         ChainId.MAINNET
       )
-      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE).chainId).toEqual(
+      expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).chainId).toEqual(
         ChainId.MAINNET
       )
     })
   })
   describe('#involvesToken', () => {
     expect(
-      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).involvesToken(USDC)
+      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(USDC)
     ).toEqual(true)
     expect(
-      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).involvesToken(DAI)
+      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(DAI)
     ).toEqual(true)
     expect(
-      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE).involvesToken(
+      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(
         WETH[ChainId.MAINNET]
       )
     ).toEqual(false)
