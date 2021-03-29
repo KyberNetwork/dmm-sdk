@@ -2,7 +2,7 @@ import { TokenAmount, Price } from './fractions'
 import invariant from 'tiny-invariant'
 import JSBI from 'jsbi'
 
-import { BigintIsh, MINIMUM_LIQUIDITY, ZERO, ONE, FIVE, ChainId, PRECISION } from '../constants'
+import { BigintIsh, MINIMUM_LIQUIDITY, ZERO, ONE, ChainId, PRECISION } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
 import { Token } from './token'
@@ -204,7 +204,7 @@ export class Pair {
     token: Token,
     totalSupply: TokenAmount,
     liquidity: TokenAmount,
-    feeOn: boolean = false,
+    feeBps: JSBI = ZERO,
     kLast?: BigintIsh
   ): TokenAmount {
     invariant(this.involvesToken(token), 'TOKEN')
@@ -213,7 +213,7 @@ export class Pair {
     invariant(JSBI.lessThanOrEqual(liquidity.raw, totalSupply.raw), 'LIQUIDITY')
 
     let totalSupplyAdjusted: TokenAmount
-    if (!feeOn) {
+    if (JSBI.equal(feeBps, ZERO)) {
       totalSupplyAdjusted = totalSupply
     } else {
       invariant(!!kLast, 'K_LAST')
@@ -222,8 +222,8 @@ export class Pair {
         const rootK = sqrt(JSBI.multiply(this.virtualReserve0.raw, this.virtualReserve1.raw))
         const rootKLast = sqrt(kLastParsed)
         if (JSBI.greaterThan(rootK, rootKLast)) {
-          const numerator = JSBI.multiply(totalSupply.raw, JSBI.subtract(rootK, rootKLast))
-          const denominator = JSBI.add(JSBI.multiply(rootK, FIVE), rootKLast)
+          const numerator = JSBI.multiply(JSBI.multiply(totalSupply.raw, JSBI.subtract(rootK, rootKLast)), feeBps)
+          const denominator = JSBI.multiply(JSBI.add(rootK, rootKLast), JSBI.BigInt(5000))
           const feeLiquidity = JSBI.divide(numerator, denominator)
           totalSupplyAdjusted = totalSupply.add(new TokenAmount(this.liquidityToken, feeLiquidity))
         } else {

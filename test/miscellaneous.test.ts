@@ -1,3 +1,4 @@
+import { ZERO } from '../src/constants'
 import { ChainId, Token, TokenAmount, Pair, InsufficientInputAmountError, JSBI } from '../src'
 import { sortedInsert } from '../src/utils'
 
@@ -84,7 +85,7 @@ describe('miscellaneous', () => {
         tokenA,
         new TokenAmount(pair.liquidityToken, '1000'),
         new TokenAmount(pair.liquidityToken, '1000'),
-        false
+        ZERO
       )
       expect(liquidityValue.token.equals(tokenA)).toBe(true)
       expect(liquidityValue.raw.toString()).toBe('1000')
@@ -96,7 +97,7 @@ describe('miscellaneous', () => {
         tokenA,
         new TokenAmount(pair.liquidityToken, '1000'),
         new TokenAmount(pair.liquidityToken, '500'),
-        false
+        ZERO
       )
       expect(liquidityValue.token.equals(tokenA)).toBe(true)
       expect(liquidityValue.raw.toString()).toBe('500')
@@ -108,7 +109,7 @@ describe('miscellaneous', () => {
         tokenB,
         new TokenAmount(pair.liquidityToken, '1000'),
         new TokenAmount(pair.liquidityToken, '1000'),
-        false
+        ZERO
       )
       expect(liquidityValue.token.equals(tokenB)).toBe(true)
       expect(liquidityValue.raw.toString()).toBe('1000')
@@ -132,11 +133,11 @@ describe('miscellaneous', () => {
       tokenA,
       new TokenAmount(pair.liquidityToken, '500'),
       new TokenAmount(pair.liquidityToken, '500'),
-      true,
+      JSBI.BigInt(1000),
       '250000' // 500 ** 2
     )
     expect(liquidityValue.token.equals(tokenA)).toBe(true)
-    expect(liquidityValue.raw.toString()).toBe('917') // ceiling(1000 - (500 * (1 / 6)))
+    expect(liquidityValue.raw.toString()).toBe('938')
   })
 
   describe('#sortedInsert', () => {
