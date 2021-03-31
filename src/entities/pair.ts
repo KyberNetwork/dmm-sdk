@@ -6,6 +6,8 @@ import { BigintIsh, MINIMUM_LIQUIDITY, ZERO, ONE, ChainId, PRECISION } from '../
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
 import { Token } from './token'
+
+//TODO: rename to Pool object
 export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
