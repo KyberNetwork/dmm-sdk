@@ -135,7 +135,7 @@ export class Pair {
     const denominator = JSBI.add(inputReserve.raw, inputAmountWithFee)
     const outputAmount = new TokenAmount(outputToken, JSBI.divide(numerator, denominator))
 
-    if (JSBI.greaterThan(outputAmount.raw, this.reserveOf(outputToken).raw)) {
+    if (JSBI.greaterThanOrEqual(outputAmount.raw, this.reserveOf(outputToken).raw)) {
       throw new InsufficientReservesError()
     }
 
@@ -150,8 +150,7 @@ export class Pair {
     if (
       JSBI.equal(this.reserve0.raw, ZERO) ||
       JSBI.equal(this.reserve1.raw, ZERO) ||
-      JSBI.greaterThanOrEqual(outputAmount.raw, this.reserveOf(outputAmount.token).raw) ||
-      JSBI.greaterThan(outputAmount.raw, this.virtualReserveOf(outputAmount.token).raw)
+      JSBI.greaterThanOrEqual(outputAmount.raw, this.reserveOf(outputAmount.token).raw)
     ) {
       throw new InsufficientReservesError()
     }
