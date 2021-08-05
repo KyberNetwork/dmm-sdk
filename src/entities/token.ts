@@ -93,5 +93,19 @@ export const WETH = {
     18,
     'WMATIC',
     'Wrapped Matic'
+  ),
+  [ChainId.BSCTESTNET]: new Token(
+    ChainId.BSCTESTNET,
+    '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    18,
+    'WBNB',
+    'Wrapped BNB'
+  ),
+  [ChainId.BSCMAINNET]: new Token(
+    ChainId.BSCMAINNET,
+    '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+    18,
+    'WBNB',
+    'Wrapped BNB'
   )
 }
