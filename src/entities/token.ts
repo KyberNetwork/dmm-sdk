@@ -107,5 +107,19 @@ export const WETH = {
     18,
     'WBNB',
     'Wrapped BNB'
+  ),
+  [ChainId.AVAXTESTNET]: new Token(
+    ChainId.AVAXTESTNET,
+    '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
+    18,
+    'WAVAX',
+    'Wrapped AVAX'
+  ),
+  [ChainId.AVAXMAINNET]: new Token(
+    ChainId.AVAXMAINNET,
+    '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7',
+    18,
+    'WAVAX',
+    'Wrapped AVAX'
   )
 }
