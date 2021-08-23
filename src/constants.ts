@@ -12,7 +12,9 @@ export enum ChainId {
   MATIC = 137,
   MUMBAI = 80001,
   BSCTESTNET = 97,
-  BSCMAINNET = 56
+  BSCMAINNET = 56,
+  AVAXTESTNET = 43113,
+  AVAXMAINNET = 43114
 }
 
 export enum TradeType {
