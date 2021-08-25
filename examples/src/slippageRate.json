@@ -1,0 +1,9 @@
+{
+    "baseAmount": "15696472493555971572446",
+    "quoteAmount": "49046616430683",
+    "ampBps": 12000,
+    "baseDecimals": 18,
+    "quoteDecimals": 6,
+    "amount": "100000000",
+    "slippageAmount": "100000000000"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "devDependencies": {
+    "@dynamic-amm/sdk": "^3.0.11",
+    "tsc": "^2.0.3",
+    "tsdx": "^0.14.1"
+  },
+  "dependencies": {
+    "typescript": "^4.3.5"
+  }
+}
