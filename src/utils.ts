@@ -13,9 +13,7 @@ export function validateSolidityTypeInstance(value: JSBI, solidityType: Solidity
 // warns if addresses are not checksummed
 export function validateAndParseAddress(address: string): string {
   try {
-    const checksummedAddress = getAddress(address)
-    warning(address === checksummedAddress, `${address} is not checksummed.`)
-    return checksummedAddress
+    return getAddress(address)
   } catch (error) {
     invariant(false, `${address} is not a valid address.`)
   }
