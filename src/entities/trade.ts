@@ -18,7 +18,11 @@ import { currencyEquals, Token, WETH } from './token'
  * @param inputAmount the input amount of the trade
  * @param outputAmount the output amount of the trade
  */
-function computePriceImpact(midPrice: Price, inputAmount: CurrencyAmount, outputAmount: CurrencyAmount): Percent {
+export function computePriceImpact(
+  midPrice: Price,
+  inputAmount: CurrencyAmount,
+  outputAmount: CurrencyAmount
+): Percent {
   const exactQuote = midPrice.raw.multiply(inputAmount.raw)
   // calculate slippage := (exactQuote - outputAmount) / exactQuote
   const slippage = exactQuote.subtract(outputAmount.raw).divide(exactQuote)
