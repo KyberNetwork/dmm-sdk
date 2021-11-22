@@ -15,7 +15,9 @@ export enum ChainId {
   BSCMAINNET = 56,
   AVAXTESTNET = 43113,
   AVAXMAINNET = 43114,
-  FANTOM = 250
+  FANTOM = 250,
+  CRONOSTESTNET = 338,
+  CRONOS = 25
 }
 
 export enum TradeType {
