@@ -128,5 +128,13 @@ export const WETH = {
     18,
     'WFTM',
     'Wrapped Fantom'
-  )
+  ),
+  [ChainId.CRONOSTESTNET]: new Token(
+    ChainId.CRONOSTESTNET,
+    '0x340eefA7154BF23e328F59E936568607841FE027',
+    18,
+    'WCRO',
+    'Wrapped CRO'
+  ),
+  [ChainId.CRONOS]: new Token(ChainId.CRONOS, '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23', 18, 'WCRO', 'Wrapped CRO')
 }
