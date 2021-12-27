@@ -1,7 +1,7 @@
 {
   "name": "@vutien/dmm-v2-sdk",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "🛠 An SDK for building applications on top of Dynamic AMM.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -28,7 +28,7 @@
     "@ethersproject/networks": "^5.0.2",
     "@ethersproject/providers": "^5.0.5",
     "@ethersproject/solidity": "^5.0.2",
-    "@vutien/sdk-core": "^0.0.6",
+    "@vutien/sdk-core": "^0.0.8",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",
     "jsbi": "^3.1.1",

@@ -1977,16 +1977,16 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
-"@vutien/sdk-core@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@vutien/sdk-core/-/sdk-core-0.0.6.tgz#dd8a0ff75756bf102c95e0857a0bbb356cec9493"
-  integrity sha512-anuvBqneUMD5AzuUVohlhkwTOhfG2+N9d0VCmXwkVn9+QexaRCzf6OncJ+l/6Kx4kAs0DX+JMKuBZbwFzSd8Eg==
+"@vutien/sdk-core@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@vutien/sdk-core/-/sdk-core-0.0.8.tgz#33496ee7c2b170afe56ee4e2bbdb72167c28f2b1"
+  integrity sha512-AGydEZCnK37ZeypDZTWqUyoqXs8zx34OnYHy+P3Q4zYlmnx9o7xYyBjNgvpZx3W8AJDfLpU0Ox5Vg9EBpdgy8g==
   dependencies:
+    "@ethersproject/address" "^5.0.2"
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
-    jsbi "^3.1.1"
+    jsbi "^3.1.4"
     tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
 "@yarnpkg/lockfile@^1.1.0":
@@ -6871,6 +6871,11 @@ jsbi@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/jsbi/-/jsbi-3.1.3.tgz#f024b340032f7c7caaa6ca4b32b55e8d33f6e897"
   integrity sha512-nBJqA0C6Qns+ZxurbEoIR56wyjiUszpNy70FHvxO5ervMoCbZVE3z3kxr5nKGhlxr/9MhKTSUBs7cAwwuf3g9w==
+
+jsbi@^3.1.4:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/jsbi/-/jsbi-3.2.5.tgz#b37bb90e0e5c2814c1c2a1bcd8c729888a2e37d6"
+  integrity sha512-aBE4n43IPvjaddScbvWRA2YlTzKEynHzu7MqOyTipdHucf/VxS63ViCjxYRg86M8Rxwbt/GfzHl1kKERkt45fQ==
 
 jsbn@~0.1.0:
   version "0.1.1"
