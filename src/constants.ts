@@ -1,36 +1,36 @@
 import JSBI from 'jsbi'
 
-// exports for external consumption
-export type BigintIsh = JSBI | bigint | string
+// // exports for external consumption
+// export type BigintIsh = JSBI | bigint | string
 
-export enum ChainId {
-  MAINNET = 1,
-  ROPSTEN = 3,
-  RINKEBY = 4,
-  GÖRLI = 5,
-  KOVAN = 42,
-  MATIC = 137,
-  MUMBAI = 80001,
-  BSCTESTNET = 97,
-  BSCMAINNET = 56,
-  AVAXTESTNET = 43113,
-  AVAXMAINNET = 43114,
-  FANTOM = 250,
-  CRONOSTESTNET = 338,
-  CRONOS = 25,
-  AURORA = 1313161554
-}
+// export enum ChainId {
+//   MAINNET = 1,
+//   ROPSTEN = 3,
+//   RINKEBY = 4,
+//   GÖRLI = 5,
+//   KOVAN = 42,
+//   MATIC = 137,
+//   MUMBAI = 80001,
+//   BSCTESTNET = 97,
+//   BSCMAINNET = 56,
+//   AVAXTESTNET = 43113,
+//   AVAXMAINNET = 43114,
+//   FANTOM = 250,
+//   CRONOSTESTNET = 338,
+//   CRONOS = 25,
+//   AURORA = 1313161554
+// }
 
-export enum TradeType {
-  EXACT_INPUT,
-  EXACT_OUTPUT
-}
+// export enum TradeType {
+//   EXACT_INPUT,
+//   EXACT_OUTPUT
+// }
 
-export enum Rounding {
-  ROUND_DOWN,
-  ROUND_HALF_UP,
-  ROUND_UP
-}
+// export enum Rounding {
+//   ROUND_DOWN,
+//   ROUND_HALF_UP,
+//   ROUND_UP
+// }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
 

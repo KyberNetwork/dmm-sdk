@@ -1,7 +1,8 @@
-import { ChainId, Fetcher } from '../src'
+import { Fetcher } from '../src'
+import { ChainId } from '@vutien/sdk-core'
 
 // TODO: replace the provider in these tests
-describe.skip('data', () => {
+describe('data', () => {
   it('Token', async () => {
     const token = await Fetcher.fetchTokenData(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F') // DAI
     expect(token.decimals).toEqual(18)

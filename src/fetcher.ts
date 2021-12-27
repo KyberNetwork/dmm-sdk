@@ -1,16 +1,14 @@
 import { Contract } from '@ethersproject/contracts'
 import { getNetwork } from '@ethersproject/networks'
 import { getDefaultProvider } from '@ethersproject/providers'
-import { TokenAmount } from './entities/fractions/tokenAmount'
+import { Token, TokenAmount } from '@vutien/sdk-core'
 import { Pair } from './entities/pair'
 import invariant from 'tiny-invariant'
 import ERC20 from './abis/ERC20.json'
 import DMMFactory from './abis/DMMFactory.json'
 import DMMPool from './abis/DMMPool.json'
 
-import { ChainId } from './constants'
-import { parseBigintIsh } from './utils'
-import { Token } from './entities/token'
+import { ChainId } from '@vutien/sdk-core'
 import { JSBI } from '.'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
@@ -85,11 +83,11 @@ export abstract class Fetcher {
           : [reserve1, reserve0, vReserve1, vReserve0]
         return new Pair(
           address,
-          new TokenAmount(tokenA, balances[0]),
-          new TokenAmount(tokenB, balances[1]),
-          new TokenAmount(tokenA, balances[2]),
-          new TokenAmount(tokenB, balances[3]),
-          parseBigintIsh(feeInPrecision),
+          TokenAmount.fromRawAmount(tokenA, balances[0]),
+          TokenAmount.fromRawAmount(tokenB, balances[1]),
+          TokenAmount.fromRawAmount(tokenA, balances[2]),
+          TokenAmount.fromRawAmount(tokenB, balances[3]),
+          JSBI.BigInt(feeInPrecision),
           JSBI.BigInt(ampBps)
         )
       })

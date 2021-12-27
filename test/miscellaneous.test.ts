@@ -1,6 +1,7 @@
 import { ZERO } from '../src/constants'
-import { ChainId, Token, TokenAmount, Pair, InsufficientInputAmountError, JSBI } from '../src'
-import { sortedInsert } from '../src/utils'
+import JSBI from 'jsbi'
+import { Pair, InsufficientInputAmountError } from '../src'
+import { ChainId, Token, TokenAmount, sortedInsert } from '@vutien/sdk-core'
 
 const ampBps = JSBI.BigInt(10000)
 
@@ -10,37 +11,37 @@ describe('miscellaneous', () => {
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
     const pair = new Pair(
       '0x0000000000000000000000000000000000000003',
-      new TokenAmount(tokenA, '0'),
-      new TokenAmount(tokenB, '0'),
-      new TokenAmount(tokenA, '0'),
-      new TokenAmount(tokenB, '0'),
+      TokenAmount.fromRawAmount(tokenA, '0'),
+      TokenAmount.fromRawAmount(tokenB, '0'),
+      TokenAmount.fromRawAmount(tokenA, '0'),
+      TokenAmount.fromRawAmount(tokenB, '0'),
       JSBI.BigInt(0),
       ampBps
     )
 
     expect(() => {
       pair.getLiquidityMinted(
-        new TokenAmount(pair.liquidityToken, '0'),
-        new TokenAmount(tokenA, '1000'),
-        new TokenAmount(tokenB, '1000')
+        TokenAmount.fromRawAmount(pair.liquidityToken, '0'),
+        TokenAmount.fromRawAmount(tokenA, '1000'),
+        TokenAmount.fromRawAmount(tokenB, '1000')
       )
     }).toThrow(InsufficientInputAmountError)
 
     expect(() => {
       pair.getLiquidityMinted(
-        new TokenAmount(pair.liquidityToken, '0'),
-        new TokenAmount(tokenA, '1000000'),
-        new TokenAmount(tokenB, '1')
+        TokenAmount.fromRawAmount(pair.liquidityToken, '0'),
+        TokenAmount.fromRawAmount(tokenA, '1000000'),
+        TokenAmount.fromRawAmount(tokenB, '1')
       )
     }).toThrow(InsufficientInputAmountError)
 
     const liquidity = pair.getLiquidityMinted(
-      new TokenAmount(pair.liquidityToken, '0'),
-      new TokenAmount(tokenA, '1001'),
-      new TokenAmount(tokenB, '1001')
+      TokenAmount.fromRawAmount(pair.liquidityToken, '0'),
+      TokenAmount.fromRawAmount(tokenA, '1001'),
+      TokenAmount.fromRawAmount(tokenB, '1001')
     )
 
-    expect(liquidity.raw.toString()).toEqual('1')
+    expect(liquidity.quotient.toString()).toEqual('1')
   })
 
   it('getLiquidityMinted:!0', async () => {
@@ -48,10 +49,10 @@ describe('miscellaneous', () => {
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
     const pair = new Pair(
       '0x0000000000000000000000000000000000000003',
-      new TokenAmount(tokenA, '10000'),
-      new TokenAmount(tokenB, '10000'),
-      new TokenAmount(tokenA, '10000'),
-      new TokenAmount(tokenB, '10000'),
+      TokenAmount.fromRawAmount(tokenA, '10000'),
+      TokenAmount.fromRawAmount(tokenB, '10000'),
+      TokenAmount.fromRawAmount(tokenA, '10000'),
+      TokenAmount.fromRawAmount(tokenB, '10000'),
       JSBI.BigInt(0),
       ampBps
     )
@@ -59,11 +60,11 @@ describe('miscellaneous', () => {
     expect(
       pair
         .getLiquidityMinted(
-          new TokenAmount(pair.liquidityToken, '10000'),
-          new TokenAmount(tokenA, '2000'),
-          new TokenAmount(tokenB, '2000')
+          TokenAmount.fromRawAmount(pair.liquidityToken, '10000'),
+          TokenAmount.fromRawAmount(tokenA, '2000'),
+          TokenAmount.fromRawAmount(tokenB, '2000')
         )
-        .raw.toString()
+        .quotient.toString()
     ).toEqual('2000')
   })
 
@@ -72,10 +73,10 @@ describe('miscellaneous', () => {
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
     const pair = new Pair(
       '0x0000000000000000000000000000000000000003',
-      new TokenAmount(tokenA, '1000'),
-      new TokenAmount(tokenB, '1000'),
-      new TokenAmount(tokenA, '1000'),
-      new TokenAmount(tokenB, '1000'),
+      TokenAmount.fromRawAmount(tokenA, '1000'),
+      TokenAmount.fromRawAmount(tokenB, '1000'),
+      TokenAmount.fromRawAmount(tokenA, '1000'),
+      TokenAmount.fromRawAmount(tokenB, '1000'),
       JSBI.BigInt(0),
       ampBps
     )
@@ -83,36 +84,36 @@ describe('miscellaneous', () => {
     {
       const liquidityValue = pair.getLiquidityValue(
         tokenA,
-        new TokenAmount(pair.liquidityToken, '1000'),
-        new TokenAmount(pair.liquidityToken, '1000'),
+        TokenAmount.fromRawAmount(pair.liquidityToken, '1000'),
+        TokenAmount.fromRawAmount(pair.liquidityToken, '1000'),
         ZERO
       )
-      expect(liquidityValue.token.equals(tokenA)).toBe(true)
-      expect(liquidityValue.raw.toString()).toBe('1000')
+      expect(liquidityValue.currency.equals(tokenA)).toBe(true)
+      expect(liquidityValue.quotient.toString()).toBe('1000')
     }
 
     // 500
     {
       const liquidityValue = pair.getLiquidityValue(
         tokenA,
-        new TokenAmount(pair.liquidityToken, '1000'),
-        new TokenAmount(pair.liquidityToken, '500'),
+        TokenAmount.fromRawAmount(pair.liquidityToken, '1000'),
+        TokenAmount.fromRawAmount(pair.liquidityToken, '500'),
         ZERO
       )
-      expect(liquidityValue.token.equals(tokenA)).toBe(true)
-      expect(liquidityValue.raw.toString()).toBe('500')
+      expect(liquidityValue.currency.equals(tokenA)).toBe(true)
+      expect(liquidityValue.quotient.toString()).toBe('500')
     }
 
     // tokenB
     {
       const liquidityValue = pair.getLiquidityValue(
         tokenB,
-        new TokenAmount(pair.liquidityToken, '1000'),
-        new TokenAmount(pair.liquidityToken, '1000'),
+        TokenAmount.fromRawAmount(pair.liquidityToken, '1000'),
+        TokenAmount.fromRawAmount(pair.liquidityToken, '1000'),
         ZERO
       )
-      expect(liquidityValue.token.equals(tokenB)).toBe(true)
-      expect(liquidityValue.raw.toString()).toBe('1000')
+      expect(liquidityValue.currency.equals(tokenB)).toBe(true)
+      expect(liquidityValue.quotient.toString()).toBe('1000')
     }
   })
 
@@ -121,23 +122,23 @@ describe('miscellaneous', () => {
     const tokenB = new Token(ChainId.RINKEBY, '0x0000000000000000000000000000000000000002', 18)
     const pair = new Pair(
       '0x0000000000000000000000000000000000000003',
-      new TokenAmount(tokenA, '1000'),
-      new TokenAmount(tokenB, '1000'),
-      new TokenAmount(tokenA, '1000'),
-      new TokenAmount(tokenB, '1000'),
+      TokenAmount.fromRawAmount(tokenA, '1000'),
+      TokenAmount.fromRawAmount(tokenB, '1000'),
+      TokenAmount.fromRawAmount(tokenA, '1000'),
+      TokenAmount.fromRawAmount(tokenB, '1000'),
       JSBI.BigInt(0),
       ampBps
     )
 
     const liquidityValue = pair.getLiquidityValue(
       tokenA,
-      new TokenAmount(pair.liquidityToken, '500'),
-      new TokenAmount(pair.liquidityToken, '500'),
+      TokenAmount.fromRawAmount(pair.liquidityToken, '500'),
+      TokenAmount.fromRawAmount(pair.liquidityToken, '500'),
       JSBI.BigInt(1000),
       '250000' // 500 ** 2
     )
-    expect(liquidityValue.token.equals(tokenA)).toBe(true)
-    expect(liquidityValue.raw.toString()).toBe('938')
+    expect(liquidityValue.currency.equals(tokenA)).toBe(true)
+    expect(liquidityValue.quotient.toString()).toBe('938')
   })
 
   describe('#sortedInsert', () => {

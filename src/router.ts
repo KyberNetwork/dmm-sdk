@@ -1,7 +1,6 @@
-import { TradeType } from './constants'
 import invariant from 'tiny-invariant'
-import { validateAndParseAddress } from './utils'
-import { CurrencyAmount, ETHER, Percent, Trade } from './entities'
+import { Currency, CurrencyAmount, Percent, validateAndParseAddress, TradeType } from '@vutien/sdk-core'
+import { Trade } from './entities'
 
 /**
  * Options for producing the arguments to send call to the router.
@@ -54,8 +53,8 @@ export interface SwapParameters {
   value: string
 }
 
-function toHex(currencyAmount: CurrencyAmount) {
-  return `0x${currencyAmount.raw.toString(16)}`
+function toHex(currencyAmount: CurrencyAmount<Currency>) {
+  return `0x${currencyAmount.quotient.toString(16)}`
 }
 
 const ZERO_HEX = '0x0'
@@ -73,9 +72,12 @@ export abstract class Router {
    * @param trade to produce call parameters for
    * @param options options for the call parameters
    */
-  public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline): SwapParameters {
-    const etherIn = trade.inputAmount.currency === ETHER
-    const etherOut = trade.outputAmount.currency === ETHER
+  public static swapCallParameters(
+    trade: Trade<Currency, Currency, TradeType>,
+    options: TradeOptions | TradeOptionsDeadline
+  ): SwapParameters {
+    const etherIn = trade.inputAmount.currency.isNative
+    const etherOut = trade.outputAmount.currency.isNative
     // the router does not support both ether in and out
     invariant(!(etherIn && etherOut), 'ETHER_IN_OUT')
     invariant(!('ttl' in options) || options.ttl > 0, 'TTL')

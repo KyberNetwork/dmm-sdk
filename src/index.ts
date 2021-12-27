@@ -5,10 +5,10 @@ import DMMPool from './abis/DMMPool.json'
 export { JSBI }
 export { ERC20, DMMFactory, DMMPool }
 
-export { ChainId, TradeType, Rounding, MINIMUM_LIQUIDITY } from './constants'
+export { MINIMUM_LIQUIDITY } from './constants'
 export * from './constants'
 export * from './errors'
 export * from './entities'
 export * from './router'
 export * from './fetcher'
-export * from './utils'
+// export * from './utils'

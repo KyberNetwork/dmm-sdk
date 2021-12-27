@@ -1,13 +1,16 @@
-import { ChainId, Token, Pair, TokenAmount, WETH, Price, JSBI } from '../src'
+import JSBI from 'jsbi'
+import { Pair } from '../src'
+
+import { TokenAmount, WETH, Price, ChainId, Token } from '@vutien/sdk-core'
 
 describe('Pair', () => {
   const PAIR_ADDRESS = '0x0000000000000000000000000000000000000003'
   const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 18, 'USDC', 'USD Coin')
   const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'DAI Stablecoin')
-  const USDC_AMOUNT = new TokenAmount(USDC, '101')
-  const DAI_AMOUNT = new TokenAmount(DAI, '100')
-  const V_USDC_AMOUNT = new TokenAmount(USDC, '202')
-  const V_DAI_AMOUNT = new TokenAmount(USDC, '200')
+  const USDC_AMOUNT = TokenAmount.fromRawAmount(USDC, '101')
+  const DAI_AMOUNT = TokenAmount.fromRawAmount(DAI, '100')
+  const V_USDC_AMOUNT = TokenAmount.fromRawAmount(USDC, '202')
+  const V_DAI_AMOUNT = TokenAmount.fromRawAmount(USDC, '200')
 
   const FEE = JSBI.BigInt(0)
 
@@ -20,9 +23,9 @@ describe('Pair', () => {
           new Pair(
             PAIR_ADDRESS,
             USDC_AMOUNT,
-            new TokenAmount(WETH[ChainId.RINKEBY], '100'),
+            TokenAmount.fromRawAmount(WETH[ChainId.RINKEBY], '100'),
             V_USDC_AMOUNT,
-            new TokenAmount(WETH[ChainId.RINKEBY], '100'),
+            TokenAmount.fromRawAmount(WETH[ChainId.RINKEBY], '100'),
             FEE,
             ampBps
           )

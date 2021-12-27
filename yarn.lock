@@ -1977,6 +1977,18 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
+"@vutien/sdk-core@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@vutien/sdk-core/-/sdk-core-0.0.6.tgz#dd8a0ff75756bf102c95e0857a0bbb356cec9493"
+  integrity sha512-anuvBqneUMD5AzuUVohlhkwTOhfG2+N9d0VCmXwkVn9+QexaRCzf6OncJ+l/6Kx4kAs0DX+JMKuBZbwFzSd8Eg==
+  dependencies:
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
