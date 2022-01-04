@@ -75,8 +75,8 @@ export class Pair {
 
   public priceOfReal(token: Token): Price<Token, Token> {
     invariant(this.involvesToken(token), 'TOKEN')
-    const r1 = this.virtualTokenAmounts[1].divide(this.virtualTokenAmounts[0])
-    const r2 = this.virtualTokenAmounts[0].divide(this.virtualTokenAmounts[1])
+    const r1 = this.tokenAmounts[1].divide(this.tokenAmounts[0])
+    const r2 = this.tokenAmounts[0].divide(this.tokenAmounts[1])
     return token.equals(this.token0)
       ? new Price(this.token0, this.token1, r1.denominator, r1.numerator)
       : new Price(this.token1, this.token0, r2.denominator, r2.numerator)
