@@ -49,7 +49,7 @@ describe('Router', () => {
           '0x0000000000000000000000000000000000000004'
         ])
         expect(result.value).toEqual('0x64')
-        checkDeadline(result.args[result.args.length - 1])
+        checkDeadline(result.args[result.args.length - 1] as string[] | string)
       })
 
       it('deadline specified', () => {
@@ -86,7 +86,7 @@ describe('Router', () => {
           '0x0000000000000000000000000000000000000004'
         ])
         expect(result.value).toEqual('0x0')
-        checkDeadline(result.args[result.args.length - 1])
+        checkDeadline(result.args[result.args.length - 1] as string[] | string)
       })
       it('token0 to token1', () => {
         const result = Router.swapCallParameters(
@@ -102,7 +102,7 @@ describe('Router', () => {
           '0x0000000000000000000000000000000000000004'
         ])
         expect(result.value).toEqual('0x0')
-        checkDeadline(result.args[result.args.length - 1])
+        checkDeadline(result.args[result.args.length - 1] as string[] | string)
       })
     })
     describe('exact out', () => {
@@ -119,7 +119,7 @@ describe('Router', () => {
           '0x0000000000000000000000000000000000000004'
         ])
         expect(result.value).toEqual('0x82')
-        checkDeadline(result.args[result.args.length - 1])
+        checkDeadline(result.args[result.args.length - 1] as string[] | string)
       })
       it('token1 to ether', () => {
         const result = Router.swapCallParameters(
@@ -135,7 +135,7 @@ describe('Router', () => {
           '0x0000000000000000000000000000000000000004'
         ])
         expect(result.value).toEqual('0x0')
-        checkDeadline(result.args[result.args.length - 1])
+        checkDeadline(result.args[result.args.length - 1] as string[] | string)
       })
       it('token0 to token1', () => {
         const result = Router.swapCallParameters(
@@ -151,7 +151,7 @@ describe('Router', () => {
           '0x0000000000000000000000000000000000000004'
         ])
         expect(result.value).toEqual('0x0')
-        checkDeadline(result.args[result.args.length - 1])
+        checkDeadline(result.args[result.args.length - 1] as string[] | string)
       })
     })
     describe('supporting fee on transfer', () => {
@@ -174,7 +174,7 @@ describe('Router', () => {
             '0x0000000000000000000000000000000000000004'
           ])
           expect(result.value).toEqual('0x64')
-          checkDeadline(result.args[result.args.length - 1])
+          checkDeadline(result.args[result.args.length - 1] as string[] | string)
         })
         it('token1 to ether', () => {
           const result = Router.swapCallParameters(
@@ -195,7 +195,7 @@ describe('Router', () => {
             '0x0000000000000000000000000000000000000004'
           ])
           expect(result.value).toEqual('0x0')
-          checkDeadline(result.args[result.args.length - 1])
+          checkDeadline(result.args[result.args.length - 1] as string[] | string)
         })
         it('token0 to token1', () => {
           const result = Router.swapCallParameters(
@@ -216,7 +216,7 @@ describe('Router', () => {
             '0x0000000000000000000000000000000000000004'
           ])
           expect(result.value).toEqual('0x0')
-          checkDeadline(result.args[result.args.length - 1])
+          checkDeadline(result.args[result.args.length - 1] as string[] | string)
         })
       })
       describe('exact out', () => {
