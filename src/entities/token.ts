@@ -136,5 +136,27 @@ export const WETH = {
     'WCRO',
     'Wrapped CRO'
   ),
-  [ChainId.CRONOS]: new Token(ChainId.CRONOS, '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23', 18, 'WCRO', 'Wrapped CRO')
+  [ChainId.CRONOS]: new Token(ChainId.CRONOS, '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23', 18, 'WCRO', 'Wrapped CRO'),
+
+  [ChainId.ARBITRUM]: new Token(
+    ChainId.ARBITRUM,
+    '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.ARBITRUM_TESTNET]: new Token(
+    ChainId.ARBITRUM_TESTNET,
+    '0x93D51226c4C3c265ca0c2F6420fa4c6A9151c09e',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.BTTC]: new Token(
+    ChainId.BTTC,
+    '0x8D193c6efa90BCFf940A98785d1Ce9D093d3DC8A',
+    18,
+    'WBTT',
+    'Wrapped BitTorrent'
+  )
 }
