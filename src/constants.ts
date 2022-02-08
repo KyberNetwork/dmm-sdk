@@ -17,7 +17,10 @@ export enum ChainId {
   AVAXMAINNET = 43114,
   FANTOM = 250,
   CRONOSTESTNET = 338,
-  CRONOS = 25
+  CRONOS = 25,
+  ARBITRUM = 42161,
+  ARBITRUM_TESTNET = 421611,
+  BTTC = 199
 }
 
 export enum TradeType {
