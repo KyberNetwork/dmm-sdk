@@ -96,14 +96,14 @@ export const WETH = {
   ),
   [ChainId.BSCTESTNET]: new Token(
     ChainId.BSCTESTNET,
-    '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     18,
     'WBNB',
     'Wrapped BNB'
   ),
   [ChainId.BSCMAINNET]: new Token(
     ChainId.BSCMAINNET,
-    '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     18,
     'WBNB',
     'Wrapped BNB'
@@ -117,14 +117,14 @@ export const WETH = {
   ),
   [ChainId.AVAXMAINNET]: new Token(
     ChainId.AVAXMAINNET,
-    '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7',
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
     18,
     'WAVAX',
     'Wrapped AVAX'
   ),
   [ChainId.FANTOM]: new Token(
     ChainId.FANTOM,
-    '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
     18,
     'WFTM',
     'Wrapped Fantom'
