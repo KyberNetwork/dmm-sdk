@@ -159,8 +159,8 @@ export const WETH = {
     'WBTT',
     'Wrapped BitTorrent'
   ),
-  [ChainId.BTTC]: new Token(
-    ChainId.BTTC,
+  [ChainId.VELAS]: new Token(
+    ChainId.VELAS,
     '0xc579D1f3CF86749E05CD06f7ADe17856c2CE3126',
     18,
     'WVLX',
