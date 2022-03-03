@@ -1977,10 +1977,10 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
-"@vutien/sdk-core@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@vutien/sdk-core/-/sdk-core-0.0.8.tgz#33496ee7c2b170afe56ee4e2bbdb72167c28f2b1"
-  integrity sha512-AGydEZCnK37ZeypDZTWqUyoqXs8zx34OnYHy+P3Q4zYlmnx9o7xYyBjNgvpZx3W8AJDfLpU0Ox5Vg9EBpdgy8g==
+"@vutien/sdk-core@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@vutien/sdk-core/-/sdk-core-0.0.9.tgz#cc5d23b986d4820104e9c5d605e6e9eb04948d9e"
+  integrity sha512-HTn/J1eMiXCT1fH5oREHe2iQhNpOQjo+LCplZA+r+tgy6ZgVHPEdVAueZ6rMULhKiYVf5CCXy95l6b3z8jz1IA==
   dependencies:
     "@ethersproject/address" "^5.0.2"
     big.js "^5.2.2"
