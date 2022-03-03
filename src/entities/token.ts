@@ -147,7 +147,7 @@ export const WETH = {
   ),
   [ChainId.ARBITRUM_TESTNET]: new Token(
     ChainId.ARBITRUM_TESTNET,
-    '0x93D51226c4C3c265ca0c2F6420fa4c6A9151c09e',
+    '0xB47e6A5f8b33b3F17603C83a0535A9dcD7E32681',
     18,
     'WETH',
     'Wrapped Ether'
