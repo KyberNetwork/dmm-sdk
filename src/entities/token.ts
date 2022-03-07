@@ -159,5 +159,6 @@ export const WETH = {
     'WBTT',
     'Wrapped BitTorrent'
   ),
-  [ChainId.VELAS]: new Token(ChainId.VELAS, '0xc579D1f3CF86749E05CD06f7ADe17856c2CE3126', 18, 'WVLX', 'Wrapped VLX')
+  [ChainId.VELAS]: new Token(ChainId.VELAS, '0xc579D1f3CF86749E05CD06f7ADe17856c2CE3126', 18, 'WVLX', 'Wrapped VLX'),
+  [ChainId.AURORA]: new Token(ChainId.AURORA, '0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB', 18, 'WETH', 'Wrapped ETH')
 }
