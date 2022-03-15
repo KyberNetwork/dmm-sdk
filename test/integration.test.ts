@@ -37,7 +37,7 @@ describe('integration', () => {
       BigNumber.from(0),
       BigNumber.from(0),
       wallet.address,
-      BigNumber.from(10).pow(18)
+      BigNumber.from(10).pow(18),
     )
     await router.addLiquidityNewPool(
       tokens[0].address,
@@ -48,7 +48,7 @@ describe('integration', () => {
       BigNumber.from(0),
       BigNumber.from(0),
       wallet.address,
-      BigNumber.from(10).pow(18)
+      BigNumber.from(10).pow(18),
     )
 
     pairs = await Fetcher.fetchPairData(token0, token1, factory.address, provider)

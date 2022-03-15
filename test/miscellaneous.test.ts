@@ -15,14 +15,14 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenA, '0'),
       new TokenAmount(tokenB, '0'),
       JSBI.BigInt(0),
-      ampBps
+      ampBps,
     )
 
     expect(() => {
       pair.getLiquidityMinted(
         new TokenAmount(pair.liquidityToken, '0'),
         new TokenAmount(tokenA, '1000'),
-        new TokenAmount(tokenB, '1000')
+        new TokenAmount(tokenB, '1000'),
       )
     }).toThrow(InsufficientInputAmountError)
 
@@ -30,14 +30,14 @@ describe('miscellaneous', () => {
       pair.getLiquidityMinted(
         new TokenAmount(pair.liquidityToken, '0'),
         new TokenAmount(tokenA, '1000000'),
-        new TokenAmount(tokenB, '1')
+        new TokenAmount(tokenB, '1'),
       )
     }).toThrow(InsufficientInputAmountError)
 
     const liquidity = pair.getLiquidityMinted(
       new TokenAmount(pair.liquidityToken, '0'),
       new TokenAmount(tokenA, '1001'),
-      new TokenAmount(tokenB, '1001')
+      new TokenAmount(tokenB, '1001'),
     )
 
     expect(liquidity.raw.toString()).toEqual('1')
@@ -53,7 +53,7 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenA, '10000'),
       new TokenAmount(tokenB, '10000'),
       JSBI.BigInt(0),
-      ampBps
+      ampBps,
     )
 
     expect(
@@ -61,9 +61,9 @@ describe('miscellaneous', () => {
         .getLiquidityMinted(
           new TokenAmount(pair.liquidityToken, '10000'),
           new TokenAmount(tokenA, '2000'),
-          new TokenAmount(tokenB, '2000')
+          new TokenAmount(tokenB, '2000'),
         )
-        .raw.toString()
+        .raw.toString(),
     ).toEqual('2000')
   })
 
@@ -77,7 +77,7 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenA, '1000'),
       new TokenAmount(tokenB, '1000'),
       JSBI.BigInt(0),
-      ampBps
+      ampBps,
     )
 
     {
@@ -85,7 +85,7 @@ describe('miscellaneous', () => {
         tokenA,
         new TokenAmount(pair.liquidityToken, '1000'),
         new TokenAmount(pair.liquidityToken, '1000'),
-        ZERO
+        ZERO,
       )
       expect(liquidityValue.token.equals(tokenA)).toBe(true)
       expect(liquidityValue.raw.toString()).toBe('1000')
@@ -97,7 +97,7 @@ describe('miscellaneous', () => {
         tokenA,
         new TokenAmount(pair.liquidityToken, '1000'),
         new TokenAmount(pair.liquidityToken, '500'),
-        ZERO
+        ZERO,
       )
       expect(liquidityValue.token.equals(tokenA)).toBe(true)
       expect(liquidityValue.raw.toString()).toBe('500')
@@ -109,7 +109,7 @@ describe('miscellaneous', () => {
         tokenB,
         new TokenAmount(pair.liquidityToken, '1000'),
         new TokenAmount(pair.liquidityToken, '1000'),
-        ZERO
+        ZERO,
       )
       expect(liquidityValue.token.equals(tokenB)).toBe(true)
       expect(liquidityValue.raw.toString()).toBe('1000')
@@ -126,7 +126,7 @@ describe('miscellaneous', () => {
       new TokenAmount(tokenA, '1000'),
       new TokenAmount(tokenB, '1000'),
       JSBI.BigInt(0),
-      ampBps
+      ampBps,
     )
 
     const liquidityValue = pair.getLiquidityValue(
@@ -134,7 +134,7 @@ describe('miscellaneous', () => {
       new TokenAmount(pair.liquidityToken, '500'),
       new TokenAmount(pair.liquidityToken, '500'),
       JSBI.BigInt(1000),
-      '250000' // 500 ** 2
+      '250000', // 500 ** 2
     )
     expect(liquidityValue.token.equals(tokenA)).toBe(true)
     expect(liquidityValue.raw.toString()).toBe('938')

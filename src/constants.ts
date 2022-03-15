@@ -22,18 +22,19 @@ export enum ChainId {
   ARBITRUM_TESTNET = 421611,
   BTTC = 199,
   VELAS = 106,
-  AURORA = 1313161554
+  AURORA = 1313161554,
+  OASIS = 42262,
 }
 
 export enum TradeType {
   EXACT_INPUT,
-  EXACT_OUTPUT
+  EXACT_OUTPUT,
 }
 
 export enum Rounding {
   ROUND_DOWN,
   ROUND_HALF_UP,
-  ROUND_UP
+  ROUND_UP,
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
@@ -49,10 +50,10 @@ export const PRECISION = JSBI.BigInt(1e18)
 
 export enum SolidityType {
   uint8 = 'uint8',
-  uint256 = 'uint256'
+  uint256 = 'uint256',
 }
 
 export const SOLIDITY_TYPE_MAXIMA = {
   [SolidityType.uint8]: JSBI.BigInt('0xff'),
-  [SolidityType.uint256]: JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+  [SolidityType.uint256]: JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'),
 }

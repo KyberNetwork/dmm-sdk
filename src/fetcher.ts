@@ -15,8 +15,8 @@ import { JSBI } from '.'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.MAINNET]: {
-    '0xE0B7927c4aF23765Cb51314A0E0521A9645F0E2A': 9 // DGD
-  }
+    '0xE0B7927c4aF23765Cb51314A0E0521A9645F0E2A': 9, // DGD
+  },
 }
 
 let PAIR_ADDRESS_CACHE: { [chainId: number]: { [token0Address: string]: { [token1Address: string]: string[] } } } = {}
@@ -43,7 +43,7 @@ export abstract class Fetcher {
     address: string,
     provider = getDefaultProvider(getNetwork(chainId)),
     symbol?: string,
-    name?: string
+    name?: string,
   ): Promise<Token> {
     const parsedDecimals =
       typeof TOKEN_DECIMALS_CACHE?.[chainId]?.[address] === 'number'
@@ -53,8 +53,8 @@ export abstract class Fetcher {
               ...TOKEN_DECIMALS_CACHE,
               [chainId]: {
                 ...TOKEN_DECIMALS_CACHE?.[chainId],
-                [address]: decimals
-              }
+                [address]: decimals,
+              },
             }
             return decimals
           })
@@ -72,7 +72,7 @@ export abstract class Fetcher {
     tokenA: Token,
     tokenB: Token,
     factoryAddress: string,
-    provider = getDefaultProvider(getNetwork(tokenA.chainId))
+    provider = getDefaultProvider(getNetwork(tokenA.chainId)),
   ): Promise<Pair[]> {
     const addresses = await Fetcher.fetchPairAddresses(tokenA, tokenB, factoryAddress, provider)
     return Promise.all(
@@ -90,9 +90,9 @@ export abstract class Fetcher {
           new TokenAmount(tokenA, balances[2]),
           new TokenAmount(tokenB, balances[3]),
           parseBigintIsh(feeInPrecision),
-          JSBI.BigInt(ampBps)
+          JSBI.BigInt(ampBps),
         )
-      })
+      }),
     )
   }
 
@@ -106,7 +106,7 @@ export abstract class Fetcher {
     tokenA: Token,
     tokenB: Token,
     factoryAddress: string,
-    provider = getDefaultProvider(getNetwork(tokenA.chainId))
+    provider = getDefaultProvider(getNetwork(tokenA.chainId)),
   ): Promise<string[]> {
     invariant(tokenA.chainId === tokenB.chainId, 'CHAIN_ID')
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
@@ -119,9 +119,9 @@ export abstract class Fetcher {
           ...PAIR_ADDRESS_CACHE?.[chainId],
           [tokens[0].address]: {
             ...PAIR_ADDRESS_CACHE?.[chainId]?.[tokens[0].address],
-            [tokens[1].address]: await factory.getPools(tokens[0].address, tokens[1].address)
-          }
-        }
+            [tokens[1].address]: await factory.getPools(tokens[0].address, tokens[1].address),
+          },
+        },
       }
     }
     return PAIR_ADDRESS_CACHE[chainId][tokens[0].address][tokens[1].address]

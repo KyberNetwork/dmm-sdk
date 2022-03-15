@@ -24,8 +24,8 @@ describe('Pair', () => {
             V_USDC_AMOUNT,
             new TokenAmount(WETH[ChainId.RINKEBY], '100'),
             FEE,
-            ampBps
-          )
+            ampBps,
+          ),
       ).toThrow('CHAIN_IDS')
     })
   })
@@ -33,40 +33,40 @@ describe('Pair', () => {
   describe('#token0', () => {
     it('always is the token that sorts before', () => {
       expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token0).toEqual(
-        DAI
+        DAI,
       )
       expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token0).toEqual(
-        DAI
+        DAI,
       )
     })
   })
   describe('#token1', () => {
     it('always is the token that sorts after', () => {
       expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token1).toEqual(
-        USDC
+        USDC,
       )
       expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token1).toEqual(
-        USDC
+        USDC,
       )
     })
   })
   describe('#reserve0', () => {
     it('always comes from the token that sorts before', () => {
       expect(
-        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserve0
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserve0,
       ).toEqual(DAI_AMOUNT)
       expect(
-        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserve0
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserve0,
       ).toEqual(DAI_AMOUNT)
     })
   })
   describe('#reserve1', () => {
     it('always comes from the token that sorts after', () => {
       expect(
-        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserve1
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserve1,
       ).toEqual(USDC_AMOUNT)
       expect(
-        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserve1
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserve1,
       ).toEqual(USDC_AMOUNT)
     })
   })
@@ -74,10 +74,10 @@ describe('Pair', () => {
   describe('#token0Price', () => {
     it('returns price of token0 in terms of token1', () => {
       expect(
-        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token0Price
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token0Price,
       ).toEqual(new Price(DAI, USDC, '200', '202'))
       expect(
-        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token0Price
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token0Price,
       ).toEqual(new Price(DAI, USDC, '200', '202'))
     })
   })
@@ -85,10 +85,10 @@ describe('Pair', () => {
   describe('#token1Price', () => {
     it('returns price of token1 in terms of token0', () => {
       expect(
-        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token1Price
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).token1Price,
       ).toEqual(new Price(USDC, DAI, '202', '200'))
       expect(
-        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token1Price
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).token1Price,
       ).toEqual(new Price(USDC, DAI, '202', '200'))
     })
   })
@@ -108,18 +108,18 @@ describe('Pair', () => {
   describe('#reserveOf', () => {
     it('returns reserves of the given token', () => {
       expect(
-        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserveOf(USDC)
+        new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).reserveOf(USDC),
       ).toEqual(USDC_AMOUNT)
       expect(
-        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserveOf(USDC)
+        new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserveOf(USDC),
       ).toEqual(USDC_AMOUNT)
     })
 
     it('throws if not in the pair', () => {
       expect(() =>
         new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).reserveOf(
-          WETH[ChainId.MAINNET]
-        )
+          WETH[ChainId.MAINNET],
+        ),
       ).toThrow('TOKEN')
     })
   })
@@ -127,24 +127,24 @@ describe('Pair', () => {
   describe('#chainId', () => {
     it('returns the token0 chainId', () => {
       expect(new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).chainId).toEqual(
-        ChainId.MAINNET
+        ChainId.MAINNET,
       )
       expect(new Pair(PAIR_ADDRESS, DAI_AMOUNT, USDC_AMOUNT, V_DAI_AMOUNT, V_USDC_AMOUNT, FEE, ampBps).chainId).toEqual(
-        ChainId.MAINNET
+        ChainId.MAINNET,
       )
     })
   })
   describe('#involvesToken', () => {
     expect(
-      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(USDC)
+      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(USDC),
     ).toEqual(true)
     expect(
-      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(DAI)
+      new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(DAI),
     ).toEqual(true)
     expect(
       new Pair(PAIR_ADDRESS, USDC_AMOUNT, DAI_AMOUNT, V_USDC_AMOUNT, V_DAI_AMOUNT, FEE, ampBps).involvesToken(
-        WETH[ChainId.MAINNET]
-      )
+        WETH[ChainId.MAINNET],
+      ),
     ).toEqual(false)
   })
 })

@@ -1,7 +1,7 @@
 {
   "name": "@dynamic-amm/sdk",
   "license": "MIT",
-  "version": "3.0.31",
+  "version": "3.0.33",
   "description": "🛠 An SDK for building applications on top of Dynamic AMM.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -19,7 +19,7 @@
     "build": "tsdx build && cp -r ./src/abis ./dist",
     "start": "tsdx watch",
     "test": "tsdx test",
-    "prepublishOnly": "tsdx build",
+    "prepublishOnly": "yarn build",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -51,7 +51,8 @@
   "prettier": {
     "printWidth": 120,
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "lint-staged": {
     "*.@(ts)": [
