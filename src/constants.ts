@@ -21,7 +21,8 @@ export enum ChainId {
   ARBITRUM = 42161,
   ARBITRUM_TESTNET = 421611,
   BTTC = 199,
-  VELAS = 106
+  VELAS = 106,
+  AURORA = 1313161554
 }
 
 export enum TradeType {
