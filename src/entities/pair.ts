@@ -23,7 +23,7 @@ export class Pair {
     virtualTokenAmountA: TokenAmount,
     virtualTokenAmountB: TokenAmount,
     fee: JSBI,
-    amp: JSBI
+    amp: JSBI,
   ) {
     this.address = address
     const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
@@ -131,7 +131,7 @@ export class Pair {
 
     const inputAmountWithFee = JSBI.divide(
       JSBI.multiply(inputAmount.raw, JSBI.subtract(PRECISION, this.fee)),
-      PRECISION
+      PRECISION,
     )
     const numerator = JSBI.multiply(inputAmountWithFee, outputReserve.raw)
     const denominator = JSBI.add(inputReserve.raw, inputAmountWithFee)
@@ -171,7 +171,7 @@ export class Pair {
 
     const inputAmount = new TokenAmount(
       inputToken,
-      JSBI.divide(JSBI.subtract(JSBI.add(numerator, denominator), ONE), denominator)
+      JSBI.divide(JSBI.subtract(JSBI.add(numerator, denominator), ONE), denominator),
     )
     return [inputAmount, [inputReserve.add(inputAmount), outputReserve.subtract(outputAmount)]]
   }
@@ -179,7 +179,7 @@ export class Pair {
   public getLiquidityMinted(
     totalSupply: TokenAmount,
     tokenAmountA: TokenAmount,
-    tokenAmountB: TokenAmount
+    tokenAmountB: TokenAmount,
   ): TokenAmount {
     invariant(totalSupply.token.equals(this.liquidityToken), 'LIQUIDITY')
     const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
@@ -206,7 +206,7 @@ export class Pair {
     totalSupply: TokenAmount,
     liquidity: TokenAmount,
     feeBps: JSBI = ZERO,
-    kLast?: BigintIsh
+    kLast?: BigintIsh,
   ): TokenAmount {
     invariant(this.involvesToken(token), 'TOKEN')
     invariant(totalSupply.token.equals(this.liquidityToken), 'TOTAL_SUPPLY')
@@ -237,7 +237,7 @@ export class Pair {
 
     return new TokenAmount(
       token,
-      JSBI.divide(JSBI.multiply(liquidity.raw, this.reserveOf(token).raw), totalSupplyAdjusted.raw)
+      JSBI.divide(JSBI.multiply(liquidity.raw, this.reserveOf(token).raw), totalSupplyAdjusted.raw),
     )
   }
 }

@@ -40,7 +40,7 @@ export class Price extends Fraction {
     this.quoteCurrency = quoteCurrency
     this.scalar = new Fraction(
       JSBI.exponentiate(TEN, JSBI.BigInt(baseCurrency.decimals)),
-      JSBI.exponentiate(TEN, JSBI.BigInt(quoteCurrency.decimals))
+      JSBI.exponentiate(TEN, JSBI.BigInt(quoteCurrency.decimals)),
     )
   }
 

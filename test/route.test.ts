@@ -14,7 +14,7 @@ describe('Route', () => {
     new TokenAmount(token0, '100'),
     new TokenAmount(token1, '200'),
     fee,
-    ampBps
+    ampBps,
   )
   const pair_0_weth = new Pair(
     pairAddress,
@@ -23,7 +23,7 @@ describe('Route', () => {
     new TokenAmount(token0, '100'),
     new TokenAmount(weth, '100'),
     fee,
-    ampBps
+    ampBps,
   )
   const pair_1_weth = new Pair(
     pairAddress,
@@ -32,7 +32,7 @@ describe('Route', () => {
     new TokenAmount(token1, '175'),
     new TokenAmount(weth, '100'),
     fee,
-    ampBps
+    ampBps,
   )
 
   it('constructs a path from the tokens', () => {
