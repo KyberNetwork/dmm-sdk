@@ -319,7 +319,7 @@ export class Trade<TInput extends Currency, TOutput extends Currency, TTradeType
         const pool = pair[j]
         invariant(pool.token0.equals(token0), 'INVALID_PAIR')
         invariant(pool.token1.equals(token1), 'INVALID_PAIR')
-        if (pool.reserve0.quotient.equalTo(ZERO) || pool.reserve1.quotient.equalTo(ZERO)) continue
+        if (pool.reserve0.equalTo(ZERO) || pool.reserve1.equalTo(ZERO)) continue
 
         let amountOut: TokenAmount
         try {
@@ -436,7 +436,7 @@ export class Trade<TInput extends Currency, TOutput extends Currency, TTradeType
         let pool = pair[j]
         invariant(pool.token0.equals(token0), 'INVALID_PAIR')
         invariant(pool.token1.equals(token1), 'INVALID_PAIR')
-        if (pool.reserve0.quotient.equalTo(ZERO) || pool.reserve1.quotient.equalTo(ZERO)) continue
+        if (pool.reserve0.equalTo(ZERO) || pool.reserve1.equalTo(ZERO)) continue
 
         let amountIn: TokenAmount
         try {
